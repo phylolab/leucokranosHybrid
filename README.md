@@ -135,4 +135,8 @@ singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options 
 
 **Example**
 
-*Here use `sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas`*
+*Here use `Mapping_SNP_Calling_GATK/2C_MappingProcessing.sh`*
+
+```shell
+sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
+```
