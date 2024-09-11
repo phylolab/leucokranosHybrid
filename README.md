@@ -1,9 +1,9 @@
 # Introduction
-This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS and GATK. We developed the workflows for our paper (https://doi.org/10.1101/2024.03.10.584293).
+This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS and GATK. We developed the workflows for [our paper](https://doi.org/10.1101/2024.03.10.584293).
 
 # Prerequisites
 ## ATLAS
-You can simply install the software using the below command provided by [the developer](https://anaconda.org/bioconda/atlas)
+You can simply install the software using the below command provided by [the developers](https://anaconda.org/bioconda/atlas)
 ```shell
 conda install bioconda::atlas
 ```
@@ -13,7 +13,7 @@ conda install bioconda::atlas
 module load miniconda3
 conda init bash
 ```
-`conda init bash` will hang on a sudo password input, just ignore it (ctrl-c). For more details, see https://wiki.unil.ch/ci/books/high-performance-computing-hpc/page/using-conda-and-anaconda.
+`conda init bash` will hang on a sudo password input, just ignore it (ctrl-c). For more details, please consult this [wiki page](https://wiki.unil.ch/ci/books/high-performance-computing-hpc/page/using-conda-and-anaconda).
 #### 2. Create an environment
 ```shell
 conda create --ATLAS
@@ -45,7 +45,9 @@ The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.
 - Quality control and Trimming:
    - `Mapping_SNP_Calling_ATLAS/1_trimming.sh`
    - `Mapping_SNP_Calling_GATK/1_Run_QC_Trimming.sh`
+
 *INDEX the reference genome using `Mapping_SNP_Calling_GATK/2A_Run_BWA_Refindexing.sh` before mapping*
+
 - Mapping the reads:
    - `Mapping_SNP_Calling_ATLAS/2_mapping.py` for one sample
    - `Mapping_SNP_Calling_ATLAS/2_mapping_array.sh` and `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh` for multiple samples
@@ -60,15 +62,22 @@ The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.
 # Workflow in details
 ## 1. Quality control and Trimming
 
-We trimmed the raw reads using [Trimmomatic](https://github.com/usadellab/Trimmomatic) (v.0.39, Bolger et al. 2014) and after quality control with FastQC (v.0.11.5, Andrews 2010). Adapters and low quality reads were discarded, using the following thresholds and using the adapters sequences in the TruSeq3-PE-2.fa file ([Illumina UDI adapters](https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/UDIndexes.htm)). 
+We trimmed the raw reads using [Trimmomatic](https://github.com/usadellab/Trimmomatic) (v.0.39, Bolger et al. 2014) and examined the quality before and after trimming using quality control tool FastQC (v.0.12.1, Andrews 2010). Adapters and low-quality reads were discarded, using the following thresholds and using the adapters sequences in the TruSeq3-PE-2.fa file ([Illumina UDI adapters](https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/UDIndexes.htm)). 
 
 **Required input files**
 
-* Raw fastq files (reverse and forward if sequenced in paired-ends) for each sample
+- Raw fastq files (reverse and forward if sequenced in paired-ends) for each sample
+- Illumina adapters sequences (provided with Trimmomatic)
 
-* Illumina adapters sequences (provided with Trimmomatic)
+**Example**
 
-## 2 Mapping reads to reference genome
+*Here use `1_Run_QC_Trimming.sh`*
+
+```shell
+sbatch 1_Run_QC_Trimming.sh AllSamples.txt . /Path/To/RawData Mapping_SNP_Calling_GATK/TruSeq3-PE-2.fa 20 50 10
+```
+
+## 2 Mapping the reads to reference genome
 
 Using BWA version 0.7.17. The steps are :
 
