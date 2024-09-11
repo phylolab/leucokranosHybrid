@@ -79,22 +79,31 @@ sbatch 1_Run_QC_Trimming.sh AllSamples.txt . /Path/To/RawData Mapping_SNP_Callin
 
 ## 2 Mapping the reads to reference genome
 
-Using BWA version 0.7.17. The steps are :
+Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and BamTools (v2.5.2, Barnett et al. 2011), we 
 
-   - Generate the Reference Indexing for BWA `bwa index`
-   - Mapping `bwa mem`
-   - Converting sam to bam `samtool view`
-  - Sorting bam files `samtool sort`
-  - Indexing sorted bam file `samtool index`
-  - Statistics before filtering `bamtools stats` 
+   - indexed reference genome by `bwa index`,
+   - mapped the reads by `bwa mem`,
+   - converted sam to bam by `samtool view`,
+   - sorted bam files by `samtool sort`,
+   - indexed sorted bam file by `samtool index`,
+   - generated statistics before filtering by `bamtools stats`.
 
-All the steps are included in the `2_mapping.py` script (adapted for python3 using Baptiste's script) and can be run using the `2_mapping_array.sh` script.
 
 **Required input files**
 
-* Trimmed fastq files
-* Reference genome in fasta
-* Reference genome index (`.amb`, `.ann`, `.bwt`, `.pac`, `.sa`) done using the `bwa index` command
+- Trimmed fastq files
+- Reference genome in fasta
+- Reference genome index (`.amb`, `.ann`, `.bwt`, `.pac`, `.sa`) done using the `bwa index` command
+
+**Example**
+
+*Here use `Mapping_SNP_Calling_GATK/2\**
+
+```shell
+sbatch 2A_Run_BWA_RefIndexing.sh 
+sbatch 2B_Run_BWA.sh AllSamples.txt . 1_TrimmedReads 0_AclarkiiReference/AclarkiiGenome.Chr RemoveSAM
+sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
+```
 
 ## 3 Processing BAM files
 
