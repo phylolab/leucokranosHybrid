@@ -3,7 +3,7 @@ This repository contains two workflows to obatin SNPs from raw sequencing data u
 
 # Prerequisites
 ## ATLAS
-You can simply install the software using the below command provided by [the developers](https://anaconda.org/bioconda/atlas)
+You can simply install the software using the below command provided by [the developers](https://anaconda.org/bioconda/atlas) or follow [the steps](https://atlaswiki.netlify.app/getting_started) to install from scratch.
 ```shell
 conda install bioconda::atlas
 ```
@@ -46,7 +46,7 @@ The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.
    - `Mapping_SNP_Calling_ATLAS/1_trimming.sh`
    - `Mapping_SNP_Calling_GATK/1_Run_QC_Trimming.sh`
 
-*INDEX the reference genome using `Mapping_SNP_Calling_GATK/2A_Run_BWA_Refindexing.sh` before mapping*
+<sub>*INDEX the reference genome using `Mapping_SNP_Calling_GATK/2A_Run_BWA_Refindexing.sh` before mapping*</sub>
 
 - Mapping the reads:
    - `Mapping_SNP_Calling_ATLAS/2_mapping.py` for one sample
@@ -77,7 +77,7 @@ We trimmed the raw reads using [Trimmomatic](https://github.com/usadellab/Trimmo
 sbatch 1_Run_QC_Trimming.sh AllSamples.txt . /Path/To/RawData Mapping_SNP_Calling_GATK/TruSeq3-PE-2.fa 20 50 10
 ```
 
-## 2 Mapping the reads to reference genome
+## 2. Mapping the reads to reference genome
 
 Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and BamTools (v2.5.2, Barnett et al. 2011), we 
 
@@ -97,30 +97,28 @@ Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and Ba
 
 **Example**
 
-*Here use `Mapping_SNP_Calling_GATK/2\**
+*Here use `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh*
 
 ```shell
 sbatch 2A_Run_BWA_RefIndexing.sh 
 sbatch 2B_Run_BWA.sh AllSamples.txt . 1_TrimmedReads 0_AclarkiiReference/AclarkiiGenome.Chr RemoveSAM
-sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
 ```
 
-## 3 Processing BAM files
+## 3. Processing and Filtering the mapped reads
 
-The *processing BAM files* pipeline is using samtools, picard-tools and atlas and proceed to the following steps:
+Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(V3.0.0) and ATLAS (V0.9, Link et al. 2017), we
 
-   - Generate Header `samtools view`
-   - Add Reads groups `picard AddOrReplaceReadGroups`
-   - Generate Index `samtool index`
-  - Filter BAM file `samtool view -b -f 2 -F 256 -q 30`
-  - Generate Index filtered bam file `samtool index`
-  - Check Reads Overlap `atlas readOverlap`
-  - Merge Read Groups Overlap `atlas mergeReads`
-  - Check Reads Overlap after merging reads `atlas readOverlap`
-  - Create Depth Mask `atlas createDepthMask`
-  - Assess SoftClipping `atlas assessSoftClipping`
-  - Generate Stats BAM Stats, InsertSizeMetrics `bamtools stats`
-  - Generate Stats ATLAS `atlas BAMDiagnostics`and `atlas pileup`
+   - generated headers by `samtools view`,
+   - added reads groups by `picard AddOrReplaceReadGroups`,
+   - generated index by `samtool index`,
+   - filtered BAM files by `samtool view -b -f 2 -F 256 -q 30`,
+   - generated index of filtered BAM files by `samtool index`,
+   - checked overlapping reads by `atlas readOverlap`,
+   - merged reads with removing overlapping reads by `atlas mergeReads`,
+   - checked overlapping reads after merging by `atlas readOverlap`,
+   - createed depth mask by `atlas createDepthMask`,
+   - assessed SoftClipping by `atlas assessSoftClipping`,
+   - generated statistics of merged reads by `picard CollectInsertSizeMetrics`, `bamtools stats`, `atlas BAMDiagnostics` and `atlas pileup`.
 
 To use atlas on Curnagl, we can use the Singularity container with the following command (be careful, in the `3_processing.py` script, we need to adapt the path of atlas)
 
@@ -130,9 +128,11 @@ export SINGULARITY_BINDPATH="/users,/work,/scratch"
 singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options >
 ```
 
-All the steps are included in the `3_processing.py` script and can be run using the `3_processing_array.sh` script. 
-
 **Required input file**
 
-* Sorted `.bam` file for each sample
-* Associated `.bai` index file (no need to specify it in the command line)
+- Sorted `.bam` file for each sample
+- Associated `.bai` index file (no need to specify it in the command line)
+
+**Example**
+
+*Here use `sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas`*
