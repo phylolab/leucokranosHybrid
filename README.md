@@ -1,5 +1,5 @@
 # Introduction
-This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS and GATK. We developed the workflows for [our paper](https://doi.org/10.1101/2024.03.10.584293).
+This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS (V0.9, Link et al. 2017) and GATK (V4.4.0.0, Van der Auwera & O'Connor 2020), and scripts for reproducing Figure 2A, 3 and 4 in [our paper](https://doi.org/10.1101/2024.03.10.584293).
 
 # Prerequisites
 ## ATLAS
@@ -143,4 +143,7 @@ sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
 
 
 ## 4. Calling SNPs
+
+We followed GATK Best Practices recommendations (DePristo et al., 2011; Van der Auwera & O'Connor 2020) to call the variants. 
+
 ## 5. Filtering SNPs
