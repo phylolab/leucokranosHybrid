@@ -15,7 +15,7 @@ SampleList=${1-AllSamples.txt}		# Name of the file with sample names. (should be
 workindir=${2-.}				# Working directory. Default: Current Directory
 inputfileDir=${3-/Path/To/RawData}			# Name of the directory with the input fastq.gz files (should be in workindir). Default: /Path/To/RawData
 						# The fastq files should be in the format $sample_R1.fastq.gz and $sample_R2.fastq.gz
-adapterfiles=${4-SNPCalling_GATK/TruSeq3-PE-2.fa}	# Path and name of the files where adapter sequences are. Default: SNPCalling_GATK/TruSeq3-PE-2.fa
+adapterfiles=${4-Mapping_SNP_Calling_GATK/TruSeq3-PE-2.fa}	# Path and name of the files where adapter sequences are. Default: Mapping_SNP_Calling_GATK/TruSeq3-PE-2.fa
 minQuality=${5-3}				# Minimum quality score for trimming. Default: 20
 minLength=${6-36}				# Minimum length of reads: Default: 50
 headcrop=${7-0}
