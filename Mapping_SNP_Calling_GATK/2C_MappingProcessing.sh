@@ -19,7 +19,7 @@ SampleList=${1-AllSamples.txt}			# Name of the file with sample names. Default: 
 workindir=${2-.}					# Working directory. Default: Current Directory
 inputfileDir=${3-2B_MappingOutput}			# Name of the directory with the input mapping files (should be in workindir). Default: 2B_MappingOutput
 QualityThreshold=${4-30}				# Mapping quality threshold. Default 30
-AtlasExe=${5-atlas}	#Atlas executable. Default 
+AtlasExe=${5-atlas}	#Atlas executable. Default: atlas
 ##############################
 
 
@@ -132,7 +132,7 @@ $AtlasExe task=readOverlap bam="./2C_FilteredMapping/"$sample".BWA.Aclarkii.Sort
 out="./2C_ProcessingStatistics/"$sample".BWA.Aclarkii.Sort.Filt"
 
 ####################
-# Run atlas_readMerge
+# Run Atlas mergeReads
 #  Generate a new mapping file by setting the quality of one of the overlapping segment paired reads to zero with atlas.
 ####################
 
