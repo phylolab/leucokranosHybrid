@@ -1,4 +1,64 @@
-## 1 Trimming reads
+# Introduction
+This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS and GATK. We developed the workflows for our paper (https://doi.org/10.1101/2024.03.10.584293).
+
+# Prerequisites
+## ATLAS
+You can simply install the software using the below command provided by [the developer](https://anaconda.org/bioconda/atlas)
+```shell
+conda install bioconda::atlas
+```
+### For Curnagl users at the University of Lausanne
+#### 1. Setting up Conda
+```shell
+module load miniconda3
+conda init bash
+```
+`conda init bash` will hang on a sudo password input, just ignore it (ctrl-c). For more details, see https://wiki.unil.ch/ci/books/high-performance-computing-hpc/page/using-conda-and-anaconda.
+#### 2. Create an environment
+```shell
+conda create --ATLAS
+```
+#### 3. Install the dependencies in this environment
+```shell
+conda activate ATLAS
+conda install -c conda-forge -c bioconda atlas
+```
+#### 4. Deactivate the envirnoment
+```shell
+conda deactivate
+```
+*The scripts include a command line to activate the environment before executing ATLAS programs.*
+
+## GATK
+You can download the GATK package [here](https://github.com/broadinstitute/gatk/releases) and follow [the steps](https://gatk.broadinstitute.org/hc/en-us/articles/360036194592-Getting-started-with-GATK4) to use it.
+### For Curnagl users at the University of Lausanne
+Curnagl has GATK in the common software environment so we can simply put
+```shell
+module load openjdk/17.0.8.1_1 gatk/4.4.0.0
+```
+before the command lines for executing GATK programs in the bash script.
+
+## Reference genome
+The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_003047355.2/) V.1.107 and in GATK workflow is [Amphiprion clarkii](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_027123335.1/) V1. We removed the unplaced scaffolds from the downloaded files and used only chromosomes for the analysis.
+
+# Corresponded scripts for each step
+- Quality control and Trimming:
+   - `Mapping_SNP_Calling_ATLAS/1_trimming.sh`
+   - `Mapping_SNP_Calling_GATK/1_Run_QC_Trimming.sh`
+*INDEX the reference genome using `Mapping_SNP_Calling_GATK/2A_Run_BWA_Refindexing.sh` before mapping*
+- Mapping the reads:
+   - `Mapping_SNP_Calling_ATLAS/2_mapping.py` for one sample
+   - `Mapping_SNP_Calling_ATLAS/2_mapping_array.sh` and `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh` for multiple samples
+- Processing and Filtering the mapped reads:
+   - `Mapping_SNP_Calling_ATLAS/3_processing.py` for one sample
+   - `Mapping_SNP_Calling_ATLAS/3_processing_array.sh` and `Mapping_SNP_Calling_GATK/2C_MappingProcessing.sh` for multiple samples
+- Calling SNPs:
+   - `Mapping_SNP_Calling_GATK/3*`
+- Filtering SNPs:
+   - `Mapping_SNP_Calling_GATK/4*`
+
+# Workflow in details
+## 1. Quality control and Trimming
 
 We trimmed the raw reads using [Trimmomatic](https://github.com/usadellab/Trimmomatic) (v.0.39, Bolger et al. 2014) and after quality control with FastQC (v.0.11.5, Andrews 2010). Adapters and low quality reads were discarded, using the following thresholds and using the adapters sequences in the TruSeq3-PE-2.fa file ([Illumina UDI adapters](https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/UDIndexes.htm)). 
 
