@@ -97,7 +97,7 @@ Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and Ba
 
 **Example**
 
-*Here use `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh*
+*Here use `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh`*
 
 ```shell
 sbatch 2A_Run_BWA_RefIndexing.sh 
@@ -140,3 +140,7 @@ singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options 
 ```shell
 sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
 ```
+
+
+## 4. Calling SNPs
+## 5. Filtering SNPs
