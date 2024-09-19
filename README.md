@@ -116,7 +116,7 @@ Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(V3.0.0) 
    - checked overlapping reads by `atlas readOverlap`,
    - merged reads with removing overlapping reads by `atlas mergeReads`,
    - checked overlapping reads after merging by `atlas readOverlap`,
-   - createed depth mask by `atlas createDepthMask`,
+   - created depth mask by `atlas createDepthMask`,
    - assessed SoftClipping by `atlas assessSoftClipping`,
    - generated statistics of merged reads by `picard CollectInsertSizeMetrics`, `bamtools stats`, `atlas BAMDiagnostics` and `atlas pileup`.
 
@@ -128,7 +128,7 @@ export SINGULARITY_BINDPATH="/users,/work,/scratch"
 singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options >
 ```
 
-**Required input file**
+**Required input files**
 
 - Sorted `.bam` file for each sample
 - Associated `.bai` index file (no need to specify it in the command line)
@@ -144,6 +144,19 @@ sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
 
 ## 4. Calling SNPs
 
-We followed GATK Best Practices recommendations (DePristo et al., 2011; Van der Auwera & O'Connor 2020) to call the variants. 
+Following GATK Best Practices recommendations (DePristo et al., 2011; Van der Auwera & O'Connor 2020) to call the variants, we 
+
+   - indexed reference genome by `gatk CreateSequenceDictionary` and `samtools faidx`, creating reuquired `.dict` and `.fai` files,
+   - called variants chromosome by chromosome by `gatk HaplotypeCaller`,
+   - merged variants of chromosomes for each sample by `picard MergeVcfs`,
+   - imported all merged gVCF files into a database workspace by `gatk GenomicsDBImport`,
+   - performed joint-calling by `gatk GenotypeGVCFs`.
+
+**Required input files**
+
+- Reference genome in fasta
+- Merged `.bam` file for each sample
+
+**Example**
 
 ## 5. Filtering SNPs
