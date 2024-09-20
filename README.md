@@ -88,6 +88,7 @@ Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and Ba
    - indexed sorted bam file by `samtool index`,
    - generated statistics before filtering by `bamtools stats`.
 
+These steps are included in 2_mapping.py, 2_mapping_array.sh, and 2B_Run_BWA.sh.
 
 **Required input files**
 
@@ -120,6 +121,8 @@ Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(V3.0.0) 
    - assessed SoftClipping by `atlas assessSoftClipping`,
    - generated statistics of merged reads by `picard CollectInsertSizeMetrics`, `bamtools stats`, `atlas BAMDiagnostics` and `atlas pileup`.
 
+These steps are included in 3_processing.py, 3_processing_array.sh, and 2C_MappingProcessing.sh.
+
 To use atlas on Curnagl, we can use the Singularity container with the following command (be careful, in the `3_processing.py` script, we need to adapt the path of atlas)
 
 ```shell
@@ -143,7 +146,7 @@ sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
 
 
 ## 4. Calling SNPs
-
+### GATK
 Following GATK Best Practices recommendations (DePristo et al., 2011; Van der Auwera & O'Connor 2020) to call the variants, we 
 
    - indexed reference genome by `gatk CreateSequenceDictionary` and `samtools faidx`, creating reuquired `.dict` and `.fai` files,
@@ -158,5 +161,13 @@ Following GATK Best Practices recommendations (DePristo et al., 2011; Van der Au
 - Merged `.bam` file for each sample
 
 **Example**
+
+```bash
+sbatch 3A_CreateIndexFilesForGATK.sh
+sbatch 3B_HaplotypeCaller_ByChromosomes.sh AllSamples.txt . 0_AclarkiiReference/AclarkiiGenome.Chr.fna 2C_FilteredMapping .BWA.Aclarkii.Sort.Filt_mergedReads 3B_CallingHaplotype g.vcf.gz 0_AclarkiiReference/Chromosomes.txt
+sbatch 3C_MergeVCFs.sh AllSamples.txt . 0_AclarkiiReference/AclarkiiGenome.Chr.fna 3B_CallingHaplotype 3C_CallingOutput .g.vcf.gz
+sbatch 3D_GenomicsDBImport.sh
+sbatch 3E_JointGenotyping.sh
+```
 
 ## 5. Filtering SNPs
