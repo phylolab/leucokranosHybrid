@@ -171,3 +171,4 @@ sbatch 3E_JointGenotyping.sh
 ```
 
 ## 5. Filtering SNPs
+Please use `4A_VariantStatistics.sh` to calculate the statistics of your variants, which will help you determine the thresholds. Next you can use `4B_Filtering.sh` to filter the varaints and check the statistics again.
