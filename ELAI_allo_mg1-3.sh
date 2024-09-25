@@ -6,8 +6,8 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=30G
-#SBATCH --output=outscripts/elai_allo_mg1-3seed456.%a.out
-#SBATCH --error=outscripts/elai_allo_mg1-3seed456.%a.err
+#SBATCH --output=outscripts/elai_allo_mg1-3seed123.%a.out
+#SBATCH --error=outscripts/elai_allo_mg1-3seed123.%a.err
 #SBATCH --time=24:00:00
 
 ### The script is used to perform EALI analysis using allopatric populations as the two parental groups with admixture generation parameters as 1, 2, 3 ###
@@ -21,9 +21,8 @@ inputfileprefix=${4-_SNP.SG.Filtered.nospandel}			# Prefix of input files. Defau
 p1=${5-chryso_fiji}
 p2=${6-sanda_aus}
 admixp=${7-leuco_sandadmix}
-# outputfileDir=${8-2_output}			# Name of the directory with output files. Default: 2_output
+seed=${8-123}
 chrlist=0_AclarkiiReference/Chromosomes.list
-seed=${8-456}
 
 ############################################################
 
@@ -74,15 +73,3 @@ $elai_exec -g $inputfileDir"/"$chr$inputfileprefix"."$p1".recode.geno.txt" -p 10
 
 echo "---------
 The script has finished."
-
-# Move output files to separate folders
-# mkdir -p $outputfileDir/admix_files
-# mkdir -p $outputfileDir/log_files
-# mkdir -p $outputfileDir/ps21_files
-# mkdir -p $outputfileDir/ps22_files
-# mkdir -p $outputfileDir/snpinfo_files
-# 
-# 
-
-
-
