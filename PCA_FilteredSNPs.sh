@@ -10,7 +10,7 @@
 #SBATCH --error=outscripts/PCA.err
 #SBATCH --time=1:00:00
 
-### This script is used to prune the variants and perform a PCA on the pruned dataset ###
+#### This script is used to prune the variants and perform a PCA on the pruned dataset ####
 
 ###########################
 # Arguments to pass:
