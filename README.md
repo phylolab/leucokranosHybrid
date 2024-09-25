@@ -88,7 +88,7 @@ Using BWA-MEM (v0.7.17, Li et al. 2009), SAMtools (v1.17, Li et al. 2009) and Ba
    - indexed sorted bam file by `samtool index`,
    - generated statistics before filtering by `bamtools stats`.
 
-These steps are included in 2_mapping.py, 2_mapping_array.sh, and 2B_Run_BWA.sh.
+These steps are included in `2_mapping.py`, `2_mapping_array.sh`, and `2B_Run_BWA.sh`.
 
 **Required input files**
 
@@ -121,15 +121,8 @@ Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(V3.0.0) 
    - assessed SoftClipping by `atlas assessSoftClipping`,
    - generated statistics of merged reads by `picard CollectInsertSizeMetrics`, `bamtools stats`, `atlas BAMDiagnostics` and `atlas pileup`.
 
-These steps are included in 3_processing.py, 3_processing_array.sh, and 2C_MappingProcessing.sh.
+These steps are included in `3_processing.py`, `3_processing_array.sh`, and `2C_MappingProcessing.sh`.
 
-To use atlas on Curnagl, we can use the Singularity container with the following command (be careful, in the `3_processing.py` script, we need to adapt the path of atlas)
-
-```shell
-module load singularity
-export SINGULARITY_BINDPATH="/users,/work,/scratch"
-singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options >
-```
 
 **Required input files**
 
@@ -142,6 +135,15 @@ singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options 
 
 ```shell
 sbatch 2C_MappingProcessing.sh AllSamples.txt . 2B_MappingOutput 30 atlas
+```
+
+
+To use atlas on Curnagl, we can use the Singularity container with the following command (be careful, in the `3_processing.py` script, we need to adapt the path of atlas)
+
+```shell
+module load singularity
+export SINGULARITY_BINDPATH="/users,/work,/scratch"
+singularity run /dcsrsoft/singularity/containers/atlas-0.99.sif < atlas options >
 ```
 
 
@@ -171,4 +173,21 @@ sbatch 3E_JointGenotyping.sh
 ```
 
 ## 5. Filtering SNPs
-Please use `4A_VariantStatistics.sh` to calculate the statistics of your variants, which will help you determine the thresholds. Next you can use `4B_Filtering.sh` to filter the varaints and check the statistics again.
+Please use `4A_VariantStatistics.sh` to calculate the statistics of your variants, which will help you determine the thresholds. Next you can use `4B_Filtering.sh` to filter the varaints and check the statistics again. We
+
+   - filtered the variants by `vcftools`,
+   - piped the standard output of `vcftools` with `gzip -c`,
+   - saved explicitly as a new file by `>`.
+
+
+**Required input files**
+
+- Files with variants
+
+
+**Example**
+
+```bash
+sbatch 4A_VariantStatistics.sh
+sbatch 4B_Filtering.sh
+```
