@@ -8,11 +8,9 @@
 #SBATCH --mem=30G
 #SBATCH --output=outscripts/PopGenStats.out
 #SBATCH --error=outscripts/PopGenStats.err
-#SBATCH --mail-user=wan-ting.huang.1@unil.ch
-#SBATCH --mail-type=ALL
 #SBATCH --time=48:00:00
 
-
+#### The script is used to run the scripts of Simon Martin (https://github.com/simonhmartin/genomics_general) ####
 
 ##############################
 # Argument to pass: 
