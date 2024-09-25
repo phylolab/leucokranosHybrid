@@ -14,10 +14,10 @@
 
 ###########################
 # Arguments to pass:
-workindir=${1-.}					# Working directory. Default: Current directory
-inputfileDir=${2-5_ELAI/2_output/ps21_files}			# Name of the directory with the ps21 files. Default: 5_ELAI/2_output/ps21_files
-outputfileDir=${3-5_ELAI/3_meanps21}			# Default: 5_ELAI/3_meanps21
-chrlist=${4-0_AclarkiiReference/Chromosomes.list}
+workindir=.					# Working directory. Default: Current directory
+inputfileDir=5_ELAI/2_output/ps21_files		# Name of the directory with the ps21 files. Default: 5_ELAI/2_output/ps21_files
+outputfileDir=5_ELAI/3_meanps21			# Name of the directory containing files with mean ancestral allele dosages. Default: 5_ELAI/3_meanps21
+chrlist=0_AclarkiiReference/Chromosomes.list
 
 ############################################################
 
