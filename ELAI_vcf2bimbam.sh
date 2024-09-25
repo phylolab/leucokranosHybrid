@@ -15,7 +15,7 @@
 ###########################
 # Arguments to pass:
 workindir=5_ELAI			# Working directory. Default: 5_ELAI
-inputfileDir=0_annotatedvcf			# Name of the directory with annotated files. Default: 0_annotatedvcf
+inputfileDir=0_annotatedvcf		# Name of the directory with annotated files. Default: 0_annotatedvcf
 outputfileDir=1_bimbam			# Name of the directory with output files. Default: 1_bimbam
 poplistDir=pop_files			# Name of the directory with files listing out the samples of each population. Default: pop_files
 
