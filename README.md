@@ -107,7 +107,7 @@ sbatch 2B_Run_BWA.sh AllSamples.txt . 1_TrimmedReads 0_AclarkiiReference/Aclarki
 
 ## 3. Processing and Filtering the mapped reads
 
-Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(V3.0.0) and ATLAS (V0.9, Link et al. 2017), we
+Using SAMtools, [Picard Tools](http://broadinstitute.github.io/picard/)(v3.0.0) and ATLAS (v0.9, Link et al. 2017), we
 
    - generated headers by `samtools view`,
    - added reads groups by `picard AddOrReplaceReadGroups`,
@@ -157,10 +157,13 @@ Following GATK Best Practices recommendations (DePristo et al., 2011; Van der Au
    - imported all merged gVCF files into a database workspace by `gatk GenomicsDBImport`,
    - performed joint-calling by `gatk GenotypeGVCFs`.
 
+These steps are executed chronologically by scripts 3A to 3E.
+
 **Required input files**
 
 - Reference genome in fasta
 - Merged `.bam` file for each sample
+- Associated `.bai` index file (no need to specify it in the command line)
 
 **Example**
 
@@ -173,7 +176,7 @@ sbatch 3E_JointGenotyping.sh
 ```
 
 ## 5. Filtering SNPs
-Please use `4A_VariantStatistics.sh` to calculate the statistics of your variants, which will help you determine the thresholds. Next you can use `4B_Filtering.sh` to filter the varaints and check the statistics again. We
+Please use `4A_VariantStatistics.sh` to calculate the statistics of your variants, which can be visualised by `VariantStats.R` and will help you determine the thresholds. Next you can use `4B_Filtering.sh` to filter the varaints and check the statistics again. Using VCFtools (v0.1.16, Danecek et al. 2011), we
 
    - filtered the variants by `vcftools`,
    - piped the standard output of `vcftools` with `gzip -c`,
