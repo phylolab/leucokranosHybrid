@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 
 #SBATCH --job-name=qc_trim
 #SBATCH --partition=cpu

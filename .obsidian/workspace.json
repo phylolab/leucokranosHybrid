@@ -11,8 +11,12 @@
             "id": "b5388140fe6e4d85",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "README.md"
+              }
             }
           }
         ]
@@ -140,12 +148,18 @@
   },
   "active": "b5388140fe6e4d85",
   "lastOpenFiles": [
-    "1_filtering_reads/TruSeq3-PE-2.fa",
-    "1_filtering_reads/1_run_qc_trimming.sh",
-    "1_filtering_reads/1_Run_QC_Trimming.sh",
-    "3_variant_calling",
-    "untitled folder",
-    "2_mapping",
-    "1_filtering_reads"
+    "4_variants_filtering/variants_stats.R",
+    "4_variants_filtering/4_2_variants_filtering.sh",
+    "4_variants_filtering/4_1_variants_stats.sh",
+    "4_variants_filtering/4B_Filtering.sh",
+    "4_variants_filtering/4A_VariantStatistics.sh",
+    "3_variant_calling/3_6_joint_genotyping.sh",
+    "3_variant_calling/3_5_genomics_db_import.sh",
+    "3_variant_calling/3_4_merge_vcfs.sh",
+    "3_variant_calling/3_3_gatk_haplotype_call.sh",
+    "3_variant_calling/3_2_index_ref_genome.sh",
+    "3_variant_calling/3E_JointGenotyping.sh",
+    "README_WanTing.md",
+    "README copy.md"
   ]
 }

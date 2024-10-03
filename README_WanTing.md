@@ -1,12 +1,14 @@
 # Introduction
-This repository contains the scripts used to obtain SNP data from raw sequencing data as well as scripts used for subsequent analysis and figures for the following publication [our paper](https://doi.org/10.1101/2024.03.10.584293).
-# Prerequisites - ATLAS
+This repository contains two workflows to obatin SNPs from raw sequencing data using ATLAS (V0.9, Link et al. 2017) and GATK (V4.4.0.0, Van der Auwera & O'Connor 2020), and scripts for reproducing Figure 2A, 3 and 4 in [our paper](https://doi.org/10.1101/2024.03.10.584293).
+
+# Prerequisites
+## ATLAS
 You can simply install the software using the below command provided by [the developers](https://anaconda.org/bioconda/atlas) or follow [the steps](https://atlaswiki.netlify.app/getting_started) to install from scratch.
 ```shell
 conda install bioconda::atlas
 ```
 ### For Curnagl users at the University of Lausanne
-#### 1. Setting up conda
+#### 1. Setting up Conda
 ```shell
 module load miniconda3
 conda init bash
@@ -21,45 +23,37 @@ conda create --ATLAS
 conda activate ATLAS
 conda install -c conda-forge -c bioconda atlas
 ```
-#### 4. Deactivate the environment
+#### 4. Deactivate the envirnoment
 ```shell
 conda deactivate
 ```
 *The scripts include a command line to activate the environment before executing ATLAS programs.*
-### Reference genome
-The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_003047355.2/) V.1.107 . 
-## Prerequisites - GATK pipeline
-### Softwares
-The version indicated are the one used for the manuscript analysis. However, other versions might work too. 
-* Trimmomatic 0.39
-* FastQC 0.12.1
-* BWA 0.7.17
-* Samtools 1.17   
-* GATK 4.4.0.0
-* Picard tools 2.9.0
-* BAMtools 2.5.2
-* Java 1.8.0_242
-* Python 3.11.6
-* bamUtil 1.0.15
-* R 4.3.2
-### Reference genome
-The reference genome used is *[Amphiprion clarkii](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_027123335.1/)* V1. We removed the unplaced scaffolds from the downloaded files and used only chromosomes for the analysis.
-# Summary of corresponding scripts for each step
-**Quality control and trimming of reads with Trimmomatic V0.39
-   - `atlas_pipeline/1_trimming.sh`
-   - `1_filtering_reads/1_run_qc_trimming.sh`
-**Indexing reference genome before mapping with BWA V0.7.17**
-* `2_mapping/2_1_run_bwa_ref_indexing.sh`
-**Mapping the reads with BWA V0.7.17**
-   - `atlas_pipeline/2_mapping.py` for one sample
-   - `atlas_pipeline/2_mapping_array.sh` for multiple samples 
-   - `2_mapping/2_2_run_bwa_mapping.sh` 
-**GATK preprocessing of mapped reads**
-   - `atlas_pipeline/3_processing.py` for one sample
-   - `atlas_pipeline/3_processing_array.sh` for multiple samples
-   - `3_variant_calling/3_1_gatk_preprocessing.py` for one sample and use the script `3_1_run_gatk_preprocessing.sh` to run the script on Slurm for multiple samples. 
-**SNPs calling**
-* *
+
+## GATK
+You can download the GATK package [here](https://github.com/broadinstitute/gatk/releases) and follow [the steps](https://gatk.broadinstitute.org/hc/en-us/articles/360036194592-Getting-started-with-GATK4) to use it.
+### For Curnagl users at the University of Lausanne
+Curnagl has GATK in the common software environment so we can simply put
+```shell
+module load openjdk/17.0.8.1_1 gatk/4.4.0.0
+```
+before the command lines for executing GATK programs in the bash script.
+
+## Reference genome
+The reference genome used in ATLAS workflow is [Amphiprion percula](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_003047355.2/) V.1.107 and in GATK workflow is [Amphiprion clarkii](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_027123335.1/) V1. We removed the unplaced scaffolds from the downloaded files and used only chromosomes for the analysis.
+
+# Corresponded scripts for each step
+- Quality control and Trimming:
+   - `Mapping_SNP_Calling_ATLAS/1_trimming.sh`
+   - `Mapping_SNP_Calling_GATK/1_Run_QC_Trimming.sh`
+
+<sub>*INDEX the reference genome using `Mapping_SNP_Calling_GATK/2A_Run_BWA_Refindexing.sh` before mapping*</sub>
+
+- Mapping the reads:
+   - `Mapping_SNP_Calling_ATLAS/2_mapping.py` for one sample
+   - `Mapping_SNP_Calling_ATLAS/2_mapping_array.sh` and `Mapping_SNP_Calling_GATK/2B_Run_BWA.sh` for multiple samples
+- Processing and Filtering the mapped reads:
+   - `Mapping_SNP_Calling_ATLAS/3_processing.py` for one sample
+   - `Mapping_SNP_Calling_ATLAS/3_processing_array.sh` and `Mapping_SNP_Calling_GATK/2C_MappingProcessing.sh` for multiple samples
 - Calling SNPs:
    - `Mapping_SNP_Calling_GATK/3*`
 - Filtering SNPs:
