@@ -1,0 +1,151 @@
+{
+  "main": {
+    "id": "b5d6136f7165e9aa",
+    "type": "split",
+    "children": [
+      {
+        "id": "37b6a5a05e9c0f0b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5388140fe6e4d85",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3a08083acc48e29d",
+    "type": "split",
+    "children": [
+      {
+        "id": "bc9d78c30e708cd6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c9119d29d8bc0adf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7a38b2ec71dd5ebb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "298866e94dc72662",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "30bb769842286bb4",
+    "type": "split",
+    "children": [
+      {
+        "id": "96344d8db485e40a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "77d340e4361d650a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "57b626b1b0b44f48",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8b92e25be82f103b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d17fd13eb3369ea8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "b5388140fe6e4d85",
+  "lastOpenFiles": [
+    "1_filtering_reads/TruSeq3-PE-2.fa",
+    "1_filtering_reads/1_run_qc_trimming.sh",
+    "1_filtering_reads/1_Run_QC_Trimming.sh",
+    "3_variant_calling",
+    "untitled folder",
+    "2_mapping",
+    "1_filtering_reads"
+  ]
+}
