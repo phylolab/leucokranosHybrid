@@ -53,7 +53,7 @@ List of Samples:	"$SampleList"
 Working directory:	"$workindir"
 VCF Files directory (if relative path, from "$workindir") :	"$inputfileDir"/"$sample"
 
-Output File: 	CallingOutput/"$sample".Merged"$outputsuffix
+Output File: 	"$outputfileDir"/"$sample".Merged"$outputsuffix
 
 echo "
 If settings are wrong, please look at instructions and arguments to pass
