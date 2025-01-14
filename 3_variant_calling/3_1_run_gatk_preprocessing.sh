@@ -14,12 +14,14 @@
 #### Companion script of 3_1_gatk_preprocessing.sh
 #### Input bam file names should have the following format SAMPLEID.BWA.Aclarkii.Sorted.bam 
 #### Command line example of how to run this script in slurm: sbatch 3_1_run_gatk_preprocessing.sh all_samples.txt /scratch/sschmi13/leucokranos/2_bwa_mapping/ 2_bwa_mapping_out/ reference_genome/aclarkii_genome_chr.fna 3 102400000
+#### Author: Sarah Schmid
+
 
 ##############################
 # Arguments to pass
 sample_list=${1-all_samples.txt}			# Name of the file with sample names. Default: all_samples.txt
 workindir=${2-.}					 		# Working directory. Default: current directory (should end with a "/")
-input_dir=${3-2_bwa_mapping_out}			# Name of the directory with the input fastq.gz files (should be in workindir). Default: 2_bwa_mapping_out
+input_dir=${3-2_bwa_mapping_out}			# Name of the directory with output bam files (should be in workindir). Default: 2_bwa_mapping_out
 ref_genome=${4-reference_genome/aclarkii_genome_chr}	# Name (and location) of the index of the reference genome	
 max_cpu=${5-3}								# Maximum number of CPU to use. Default = 3
 max_mem=${6-102400000}						# Maximum memory to use. Default = 102400000

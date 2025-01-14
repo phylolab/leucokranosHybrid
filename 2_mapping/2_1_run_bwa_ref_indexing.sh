@@ -8,6 +8,7 @@
 #SBATCH --time=1:00:00
 
 # Use this script only if the reference indexing (for BWA) has not been performed yet
+# Author: Wan-Ting Huang
 
 ##############################
 # Arguments to pass 

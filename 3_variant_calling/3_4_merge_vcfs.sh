@@ -11,16 +11,17 @@
 #SBATCH --time=01:00:00
 
 #### The script is used to merge gVCF files of all chromosomes into one gVCF file per sample ####
-#### Example usage: sbatch 3_4_merge_vcfs.sh all_samples.txt . reference_genome/aclarkii_genome.fna 3_3_gatk_haplotype 3_4_calling_output .g.vcf.gz
+#### Example usage: sbatch 3_4_merge_vcfs.sh all_samples.txt . 3_3_gatk_haplotype 3_4_calling_output .g.vcf.gz
+#### Author: Wan-Ting Huang
+
 
 ###########################
 # Arguments to pass
 sample_list=${1-all_samples.txt}		# Name of the file with sample names. Default: all_samples.txt
 workindir=${2-.}						# Working directory. Default: Current Directory
-ref_genome=${3-reference_genome/aclarkii_genome.fna}
-inputfile_dir=${4-3_3_gatk_haplotype}	# Name of the directory with the input mapping files (should be in workindir).
-outputfile_dir=${5-3_4_calling_output}	# Name of the directory with the merged gVCF files (should be in workindir).
-outputsuffix=${6-.g.vcf.gz}				# Suffix of output merged VCF files
+inputfile_dir=${3-3_3_gatk_haplotype}	# Name of the directory with the input mapping files (should be in workindir).
+outputfile_dir=${4-3_4_calling_output}	# Name of the directory with the merged gVCF files (should be in workindir).
+outputsuffix=${5-.g.vcf.gz}				# Suffix of output merged VCF files
 
 
 ############################################################

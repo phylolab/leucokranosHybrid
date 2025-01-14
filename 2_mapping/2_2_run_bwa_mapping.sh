@@ -11,6 +11,8 @@
 #SBATCH --time=20:00:00
 
 #### The script is used to map the reads to the reference genome ####
+#### Author: Wan-Ting Huang
+
 
 
 ##############################

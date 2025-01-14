@@ -9,6 +9,8 @@
 
 #### The script is used to generate index files for performing GATK HaplotypeCaller ####
 #### Usage: sbatch 3_2_index_ref_genome.sh <path/to/reference_genome_directory> <ref_genome.fna/fasta>
+#### Author: Wan-Ting Huang
+
 
 # GATK requires a dictionary file ending in .dict and an index file ending in .fai,
 # which are files that bwa index doesn't do. So to run HaplotypeCaller later, we need

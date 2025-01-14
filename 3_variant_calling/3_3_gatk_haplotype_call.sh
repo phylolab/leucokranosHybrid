@@ -12,6 +12,7 @@
 
 #### The script is used to call variants for each sample by chromosome using GATK HaplotypeCaller ####
 #### Example usage: sbatch 3_3_gatk_haplotype_call.sh all_samples.txt . reference_genome/aclarkii_genome_chr.fna 3_1_gatk_preprocessing .dedupped.reorder 3_3_gatk_haplotype .g.vcf.gz reference_genome/chromosomes.txt
+#### Author: Wan-Ting Huang
 
 #!! Change .out and .err name according to the number of round you are doing 
 
@@ -29,7 +30,7 @@ file_chromosomes=${8-reference_genome/chromosomes.txt}   # File with chromosomes
 
 
 ############################################################
-## Relounch the script as array with the number of jobs corresponding to the number of files
+## Relaunch the script as array with the number of jobs corresponding to the number of files
 nline=$(wc -l $sample_list | awk '{print $1}')
 
 
@@ -124,7 +125,7 @@ if [ ! -s $inputfile_dir"/"$sample"/"$sample$inputsuffix".REF_"$chrid".bam.bai" 
 		samtools index $inputfile_dir"/"$sample"/"$sample$inputsuffix".REF_"$chrid".bam"
 fi
 
-if [ ! -s $outputfile_dir"/"$sample"/"$sample"."$chrid$outputsuffix ]
+if [ ! -s $outputfile_dir"/"$sample"/"$sample"."$chrid$outputsuffix".tbi" ]
 	# If the gVCF file for this chromosome does not exist
 	then	# then call on this chromosome
 		

@@ -1,4 +1,6 @@
 #### GATK pipeline steps until Indel Realignment Step
+# Authors: Baptiste Micheli, Sarah Schmid
+
 
 # The input file is a sorted bam file obtained with mapping alghorithm (i.e. BWA)
 

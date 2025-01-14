@@ -8,6 +8,7 @@
 #SBATCH --time=16:00:00
 
 #### The script is used to perform quality tests and trimming of raw sequencing reads ####
+#### Author: Wan-Ting Huang
 
 ##############################
 ## Arguments to pass 
