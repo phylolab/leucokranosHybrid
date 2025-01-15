@@ -132,7 +132,7 @@ This step generates gVCF files for each samples and each chromosome.
 
 Now, we can merge all the gVCF file generated for each chromosome together, into a single gVCF per sample using  [Picard Tools](http://broadinstitute.github.io/picard/) (v2.9.0). This is done using the script `3_4_merge_vcfs.sh`.
 
-**Required input files*
+**Required input files**
 
 * output from the script `3_3_gatk_haplotype_call.sh` (`.g.vcf.gz`)
 
