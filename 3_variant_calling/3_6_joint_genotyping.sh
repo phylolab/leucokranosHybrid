@@ -74,7 +74,7 @@ gatk --java-options "-Xmx4g -XX:ParallelGCThreads=2" GenotypeGVCFs \
 	-O $workindir"/"$outputfile_dir"/"$chrom"_all_samples.vcf.gz" \
 	-L $chrom
 	
-echo "Joint genotyping is done and output a file "$outputfile_dir"/all_samples.vcf.gz."
+echo "Joint genotyping is done and output a file "$outputfile_dir"/"$chrom"_all_samples.vcf.gz."
 
 ####################
 # END
