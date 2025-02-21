@@ -1,5 +1,5 @@
 # Introduction
-This repository contains information on the pipeline, analysis and scripts used for the paper **Genomic architecture of the clownfish hybrid** ***Amphiprion leucokranos*** from Sarah Schmid, Diego A. Hartasánchez, Wan-Ting Huang, Ashton Gainsford, Geoffrey P. Jones, Nicolas Salamin. 
+This repository contains information on the pipeline, analysis and scripts used for the paper **Genomic architecture of the clownfish hybrid** ***Amphiprion leucokranos*** from Sarah Schmid, Diego A. Hartasánchez, Wan-Ting Huang, Ashton Gainsford, Geoffrey P. Jones, Nicolas Salamin accepted in the journal Genome Biology and Evolution. 
 
 Authors: Sarah Schmid, Wan-Ting Huang
 
